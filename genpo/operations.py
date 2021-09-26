@@ -1,9 +1,8 @@
 
-import test
 from functools import reduce
 
 
-def multiply(coffs: list, factor):
+def apply_factor(coffs: list, factor):
     """
     Multiply in place a polinomy by a factor
     """
@@ -12,7 +11,7 @@ def multiply(coffs: list, factor):
             coffs[i] = val * factor
 
 
-def sort_pols_by_grade(*pols: list):
+def sort_by_grade(*pols: list):
     """
         Sort polynomies by their grade
         returns: list - The sorted polynomies
@@ -40,7 +39,7 @@ def sum_pols(*pols: list, sort_by_grade=True):
         return pol1
 
     if sort_by_grade:
-        sorted = sort_pols_by_grade(*pols)
+        sorted = sort_by_grade(*pols)
         return reduce(sum_2_pols, sorted[1:], sorted[0][:])
     else:
         return reduce(sum_2_pols, pols[1:], pols[0][:])
@@ -53,7 +52,7 @@ def multiply_pols(*pols: list):
         multiplications_by_pol2_coff = [None] * len(pol2)
         for i, coff in enumerate(pol2):
             pol1_copy = pol1[:]
-            multiply(pol1_copy, coff)
+            apply_factor(pol1_copy, coff)
 
             # Add padding to multiply by the power of x^i
             if i > 0:
@@ -64,7 +63,7 @@ def multiply_pols(*pols: list):
         multiplications_by_pol2_coff.reverse()
         return sum_pols(*multiplications_by_pol2_coff, sort_by_grade=False)
 
-    sorted_pols = sort_pols_by_grade(*pols)
+    sorted_pols = sort_by_grade(*pols)
 
     return reduce(multiply_2_pols, sorted_pols)
 

@@ -1,50 +1,6 @@
-
 import random
-from fractions import Fraction
-from math import ceil, floor, sqrt
 
-def rand_bool():
-    """Random bool value"""
-    return bool(random.getrandbits(1))
-
-
-def easy_num_interval(negative: bool = True, min_choices: int = None):
-    """
-    Generate an interval of integer containing at least min_choices elements. The elements contains at least 7 elements
-    If negative is false the interval contains only values >= 0
-
-    returns: tuple[int] - A tuple of two elements representing the interval generated. The first is the lower bound, the second the upper bound.
-    """
-
-    min_choices = 7 if min_choices == None else max(7, abs(min_choices))
-
-    upper_bound = min_choices - 1
-    if negative:
-        upper_bound = upper_bound/2
-
-    upper_bound = ceil(upper_bound)
-
-    return (-upper_bound, upper_bound) if negative else (0, upper_bound)
-
-
-def rand_easy_num(negative: bool = True, min_choices: int = None):
-    """
-    Random easy number. See 'easy_num_interval()'
-    """
-
-    low, up = easy_num_interval(negative, min_choices)
-    return random.randint(low, up)
-
-
-fractions = [Fraction(1, 3), Fraction(1, 2), Fraction(1, 4)]
-
-
-def rand_simple_fraction():
-    """
-    Random simple fraction\n
-    A simple fraction is one of these: 1/3, 1/2, 1/4
-    """
-    return random.choice(fractions)
+import random_generators as gens
 
 
 def generate_zeroes(n: int):
@@ -62,7 +18,7 @@ def generate_zeroes(n: int):
     zeroes: set[int] = set()
 
     # Generate a random zero choosing from an interval
-    int_low, int_up = easy_num_interval(min_choices=n)
+    int_low, int_up = gens.easy_num_interval(min_choices=n)
 
     while len(zeroes) < n:
         zeroes = zeroes | {random.randint(int_low, int_up)
@@ -190,93 +146,3 @@ def generate_zeroes_with_multiplicity(multiplicities: list[int]):
         zeroes = zeroes + [zero] * mul
 
     return zeroes
-
-
-def span_random(values: list, target_length: int):
-    """
-    Span the values in the list to generate a longer list picking random values from the original list\n
-
-    parameters: 
-        - values: list - List of values
-        - target_length: int  - Length of the generated list
-
-    returns: list - A list of length specified
-    raise: ValueError if target_length is not at least as the length of the list passed
-    """
-
-    unique_values_len = len(values)
-
-    if target_length < unique_values_len:
-        raise ValueError(
-            f"target length ({target_length}) can't be less than unique_values array (len {values.__len__()})")
-
-    if unique_values_len == target_length:
-        return values
-
-    return values + [random.choice(values) for _ in range(target_length - unique_values_len)]
-
-
-def generate_coefficients(zeroes: list):
-    """
-    Generate the coefficients of a polinomy that has the zeroes specified in the list. Every zero in the list passed has to appear as many times as its multiplicity.
-
-    parameter: list - List of zeroes. If a zero has a multiplicity of m, will appear m times in the list. Btw, the length of list + 1 is the grade of the polinomy.
-    return: list - List of coefficients of the polinomy. The element at the index i is the cofficient of x^i.
-    """
-
-    n = len(zeroes) + 1
-    coff = [1 for _ in range(n)]
-
-    # The iteration i does a multiplication between the partial polinomy built and (x - zeroes[i])
-    for i in range(n - 1):
-
-        # Sum the partial array shifted of one position to the end with the array multiplied with -zeroes[i]
-        # In this way we emulate the addition of the polinomies created with the product of x and -zeroes[i]
-        zero = zeroes[i]
-        t0 = 0
-        for j in range(i+1):
-            t1 = t0
-            t0 = coff[j]
-            coff[j] = t1 - (t0 * zero)
-
-    return coff
-
-
-def generate_high_coff():
-    """
-    Generate the highest coefficient of the polinomy.\n
-    It's a random number with these probabilities:
-     - 25% is -1
-     - 25% is 1
-     - 25% is the negative value of `rand_simple_fraction()`
-     - 25% is the positive value of `rand_simple_fraction()`
-    """
-
-    sign = 1 if rand_bool() else -1
-    abs_val = 1 if rand_bool() else rand_simple_fraction()
-
-    return sign * abs_val
-
-
-def pol_2nd_grade(a=1, b=1, c=1):
-    """
-    Generate a second grade polinomy, with the parameters specified.
-
-    return: list - List of coefficients of polinomy of the form ax^2 + bx + c
-    """
-    return [c, b, a]
-
-
-def genpo_2nd_grade_no_zeroes():
-    """
-    Generate a second grade polinomy without zeroes. The cofficients of this polinomy are all integer numbers, and a is 1
-
-    return: list - List of coefficients of polinomy of the form x^2 + bx + c. The element at the index i is the cofficient of x^i.
-    """
-    c = rand_easy_num(negative=False) + 1
-    # Get a random value of b in a way that the calculated delta is negative
-    max_abs_b_value = 2 * floor(sqrt(c)) - 1
-    b = 0 if max_abs_b_value <= 0 else random.randint(
-        -1 * max_abs_b_value, max_abs_b_value)
-
-    return pol_2nd_grade(1, b, c)
