@@ -41,3 +41,6 @@ String representations of polynomials. Thought to be printed in the terminal
 
 
 ## Genpo cli 
+
+Coming soon. Stay tuned ;)
+
