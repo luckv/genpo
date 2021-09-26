@@ -20,52 +20,45 @@ def sort_by_grade(*pols: list):
     sorted_pols.sort(key=lambda l: len(l), reverse=True)
     return sorted_pols
 
+def sum_2(pol1: list, pol2: list):
+    """
+    Sum two polynomies, using the first to save the results
 
-def sum_pols(*pols: list, sort_by_grade=True):
+    raise: IndexError if pol1 len is less than pol2
+    """
+    for i in range(len(pol2)):
+        pol1[i] += pol2[i]
+
+    return pol1
+
+def sum(*pols: list, sort_by_grade=True):
     """
         Sum the polynomies passed. They must be sorted by grade to be summed, so if already sorted, pass False to sort_by_grade to reduce useless computation
     """
-
-    def sum_2_pols(pol1: list, pol2: list):
-        """
-        Sum two polynomies, using the first to save the results
-
-        raise: IndexError if pol1 len is less than pol2
-        """
-
-        for i in range(len(pol2)):
-            pol1[i] += pol2[i]
-
-        return pol1
-
     if sort_by_grade:
         sorted = sort_by_grade(*pols)
-        return reduce(sum_2_pols, sorted[1:], sorted[0][:])
+        return reduce(sum_2, sorted[1:], sorted[0][:])
     else:
-        return reduce(sum_2_pols, pols[1:], pols[0][:])
+        return reduce(sum_2, pols[1:], pols[0][:])
 
+def multiply_2(pol1: list, pol2: list):
+    multiplications_by_pol2_coff = [None] * len(pol2)
+    for i, coff in enumerate(pol2):
+        pol1_copy = pol1[:]
+        apply_factor(pol1_copy, coff)
 
-def multiply_pols(*pols: list):
+        # Add padding to multiply by the power of x^i
+        if i > 0:
+            pol1_copy = [0] * i + pol1_copy
 
-    def multiply_2_pols(pol1: list, pol2: list):
+        multiplications_by_pol2_coff[i] = pol1_copy
 
-        multiplications_by_pol2_coff = [None] * len(pol2)
-        for i, coff in enumerate(pol2):
-            pol1_copy = pol1[:]
-            apply_factor(pol1_copy, coff)
+    multiplications_by_pol2_coff.reverse()
+    return sum(*multiplications_by_pol2_coff, sort_by_grade=False)
 
-            # Add padding to multiply by the power of x^i
-            if i > 0:
-                pol1_copy = [0] * i + pol1_copy
-
-            multiplications_by_pol2_coff[i] = pol1_copy
-
-        multiplications_by_pol2_coff.reverse()
-        return sum_pols(*multiplications_by_pol2_coff, sort_by_grade=False)
-
+def multiply(*pols: list):
     sorted_pols = sort_by_grade(*pols)
-
-    return reduce(multiply_2_pols, sorted_pols)
+    return reduce(multiply_2, sorted_pols)
 
 
 def horner_evaluate(coff: list, x):

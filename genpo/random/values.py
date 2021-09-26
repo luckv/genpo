@@ -46,7 +46,7 @@ def rand_simple_fraction():
     """
     return random.choice(fractions)
 
-def span_random(values: list, target_length: int):
+def rand_span(values: list, target_length: int):
     """
     Span the values in the list to generate a longer list picking random values from the original list\n
 
@@ -69,7 +69,7 @@ def span_random(values: list, target_length: int):
 
     return values + [random.choice(values) for _ in range(target_length - unique_values_len)]
 
-def generate_high_coff():
+def rand_high_coff():
     """
     Generate the highest coefficient of the polinomy.\n
     It's a random number with these probabilities:
