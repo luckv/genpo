@@ -16,11 +16,11 @@ The genpo library modules are mainly divided in 2 section: manipulation and rand
 
 These modules provide functions to manipulate polynomials: creation, arithmetic operations and string representations
 
-### genpo.polynomials
+### `genpo.polynomials`
 
 Pure functions for creating polynomials from parameters
 
-### genpo.operations
+### `genpo.operations`
 
 Do arithmetic operations on polynomials.
 
@@ -31,13 +31,32 @@ Operations actually supported:
 - multiplication of a polynomial by a factor
 - evaluation of a polynomial and its derivative in one point
 
-### genpo.roots
+### `genpo.roots`
 
 Utilities functions to work with roots and multiplicities.
 
-### genpo.representation
+### `genpo.representation`
 
-String representations of polynomials. Thought to be printed in the terminal
+String representations of polynomials. Code thought to be printed in the terminal
+
+## Random generators (`genpo.random`)
+All modules under `genpo.random` have the scope of generating random roots and polynomials. All values generated are roots simple to find and values easy to calculate for a person that is resolving a polynomial by hand.
+
+### `values`
+
+Generators for intervals of values, simple fractions or expanding randomly a list of items. This module is used internally in more complex generators
+
+### `roots`
+
+Generators for random polynomials roots and multiplicities. All generated roots are integers numbers not too big. They are simple to find.
+
+### `polynomials`
+
+Generators for polynomials, with or without roots. This is the core of the genpo library, where many parts of the library are used. The functions in this file are divided in two categories: generators for polynomials in which the sum of multiplicities of their zeroes equals its degree, and generators for polynomials with an arbitrary sum of zeroes' multiplicity.
+
+#### `fz` generators
+
+Functions in the `genpo.random.polynomials` with `fz` in the name, are functions that returns polynomials that I defined *full zeroes*, polynomials in which the sum of multiplicities of their zeroes equals its degree.
 
 
 ## Genpo cli 
