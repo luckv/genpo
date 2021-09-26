@@ -11,6 +11,6 @@ def main_full_zeroes(pols: int = 1):
         zeroes_count = random.randint(2, 3)
         pol_grade = random.randint(3, zeroes_count + 1)
 
-        coff = genpo.genpo_fz_count(pol_grade, zeroes_count=zeroes_count)
+        coff = genpo.pol_fz_count(pol_grade, zeroes_count=zeroes_count)
 
         print(f'Coefficients: {repr.coff_str(coff)}')

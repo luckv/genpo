@@ -15,7 +15,7 @@ import genpo.random.roots as roots
 import genpo.random.values as gens
 
 
-def fz_from_multiplicities(zeroes_multiplicity: list[int], highest_coff=None):
+def pol_fz_multiplicities_base(zeroes_multiplicity: list[int], highest_coff=None):
     """
     Generate a polinomy with integer zeroes that are easy to solve. The sum of multeplicities of all the zeroes passed is the grade of the polinomy.
 
@@ -36,18 +36,18 @@ def fz_from_multiplicities(zeroes_multiplicity: list[int], highest_coff=None):
                  None else gens.rand_high_coff())
     return coff
 
-def genpo_fz_multiplicities(multiplicities: list[int], show_zeroes=False):
+def pol_fz_multiplicities(multiplicities: list[int], show_zeroes=False):
 
     zeroes_multiplicity = roots.generate_zeroes_with_multiplicity(
         multiplicities)
 
-    coff = fz_from_multiplicities(zeroes_multiplicity)
+    coff = pol_fz_multiplicities_base(zeroes_multiplicity)
 
     if show_zeroes:
         zeroes_multiplicity.sort()
         print(f'Zeroes with multiplicity: {zeroes_multiplicity}')
 
-def genpo_fz_count(grade: int, zeroes_count: int = None, show_zeroes=False):
+def pol_fz_count(grade: int, zeroes_count: int = None, show_zeroes=False):
     """
     Generate a polinomy with integer zeroes that are easy to solve. The sum of multeplicities of all zeroes of this polinomy is its grade
 
@@ -73,7 +73,7 @@ def genpo_fz_count(grade: int, zeroes_count: int = None, show_zeroes=False):
     zeroes = roots.generate_zeroes(zeroes_count)
     zeroes_multiplicity = gens.rand_span(zeroes, grade)
 
-    coff = fz_from_multiplicities(zeroes_multiplicity)
+    coff = pol_fz_multiplicities_base(zeroes_multiplicity)
 
     if show_zeroes:
         zeroes_multiplicity.sort()
@@ -81,7 +81,7 @@ def genpo_fz_count(grade: int, zeroes_count: int = None, show_zeroes=False):
 
     return coff
 
-def genpo_parabola_no_zeroes():
+def parabola_no_zeroes():
     """
     Generate a second grade polinomy without zeroes. The cofficients of this polinomy are all integer numbers, and a is 1
 
@@ -95,7 +95,7 @@ def genpo_parabola_no_zeroes():
 
     return pols.parabola(1, b, c)
 
-def genpo_1(multiplicities: list[int] = None, grade: int = None, show_zeroes=False):
+def pol_1(multiplicities: list[int] = None, grade: int = None, show_zeroes=False):
     """
     Generate a polinomy with integer zeroes that are easy to solve. The grade of this polinomy is at least the sum of the multeplicities passed.
 
@@ -130,12 +130,11 @@ def genpo_1(multiplicities: list[int] = None, grade: int = None, show_zeroes=Fal
 
     zeroes_with_multiplicity = roots.generate_zeroes_with_multiplicity(
         multiplicities)
-    coff_with_zeroes = fz_from_multiplicities(
+    coff_with_zeroes = pol_fz_multiplicities_base(
         zeroes_with_multiplicity, highest_coff=1)
 
     # Generate 2nd grade polinomies without zeroes to increment the grade of the polinomy without adding zeroes
-    coffs_without_zeroes = [prbs.genpo_2nd_grade_no_zeroes()
-                            for _ in range(int(grade_without_zeroes / 2))]
+    coffs_without_zeroes = [parabola_no_zeroes() for _ in range(int(grade_without_zeroes / 2))]
 
     res = ops.multiply(coff_with_zeroes, *coffs_without_zeroes)
 
@@ -150,7 +149,7 @@ def genpo_1(multiplicities: list[int] = None, grade: int = None, show_zeroes=Fal
     return res
 
 
-def genpo_2(min_grade: int = None, max_grade: int = None, min_zeroes: int = None, max_zeroes: int = None, min_multeplicity: int = None, max_multeplicity: int = None):
+def pol_2(min_grade: int = None, max_grade: int = None, min_zeroes: int = None, max_zeroes: int = None, min_multeplicity: int = None, max_multeplicity: int = None):
 
     if min_grade == None or min_grade < 2:
         min_grade = 2
