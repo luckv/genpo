@@ -1,3 +1,5 @@
+"""Functions for manipulating roots and multiplicities"""
+
 def keep_valid_multiplicities(mul: list[int]):
     """
     Filter the elements of the list are >= 1

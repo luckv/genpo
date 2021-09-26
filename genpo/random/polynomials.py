@@ -1,3 +1,11 @@
+"""
+    Random generators for polynomials, with or without roots
+
+    fz functions
+    -----
+    The 'fz' prepended in a function name, means that the polinomy generated has the sum of multeplicities of all its roots equal to its degree.
+"""
+
 import random
 from math import ceil, floor
 

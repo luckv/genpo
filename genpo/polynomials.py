@@ -1,4 +1,4 @@
-"""Methods to create polynomials from parameters"""
+"""Functions to create polynomials from parameters"""
 
 def parabola(a=1, b=1, c=1):
     """

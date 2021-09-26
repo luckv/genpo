@@ -1,3 +1,4 @@
+"""Random generators for single values used in more complex generators"""
 
 import random
 from fractions import Fraction

@@ -1,4 +1,7 @@
- 
+"""
+Random generators for roots and multeplicities
+""" 
+
 import random
 
 import genpo.random.values as gens

@@ -1,4 +1,4 @@
-
+"""String representations of polynomials"""
 from functools import reduce
 
 def coff_str_monotone(coff: list, min_grade: int = None):
