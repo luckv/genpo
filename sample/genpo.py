@@ -2,6 +2,7 @@
 import random
 
 import genpo.random.polynomials as genpo
+import genpo.representation as repr
 
 
 def main_full_zeroes(pols: int = 1):
@@ -12,4 +13,4 @@ def main_full_zeroes(pols: int = 1):
 
         coff = genpo.genpo_fz_count(pol_grade, zeroes_count=zeroes_count)
 
-        print(f'Coefficients: {pols.coff_str(coff)}')
+        print(f'Coefficients: {repr.coff_str(coff)}')
