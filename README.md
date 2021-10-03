@@ -4,11 +4,13 @@ A python library and a simple CLI program to generate and manipulate polynomials
 
 I started this library while studying for a math exam where it was required to quickly find the roots of a polynomial of degree 3 or 4. It helped me pass it.
 
-## Genpo library
+# Python library
 
-### Polynomials as arrays
+## Polynomials as arrays
 
 The polynomials in this library are all represented as arrays, in which the element at position `i` in the array is the coefficient of `x^i`.  I chose this representation because its simple to understand and manipulate. I didn't wrap it in a class because I think it would only create unnecessary complexity.
+
+## Modules
 
 The genpo library modules are mainly divided in 2 section: manipulation and random generators.
 
@@ -59,7 +61,7 @@ Generators for polynomials, with or without roots. This is the core of the genpo
 Functions in the `genpo.random.polynomials` with `fz` in the name, are functions that returns polynomials that I defined *full zeroes*, polynomials in which the sum of multiplicities of their zeroes equals its degree.
 
 
-## Genpo cli 
+# Genpo cli
 
 Coming soon. Stay tuned ;)
 
