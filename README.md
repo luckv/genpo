@@ -20,17 +20,17 @@ These modules provide functions to manipulate polynomials: creation, arithmetic 
 
 ### `genpo.polynomials`
 
-Pure functions for creating polynomials from parameters
+Pure functions for creating polynomials from parameters, parabolas for example.
 
 ### `genpo.operations`
 
-Do arithmetic operations on polynomials.
+Arithmetic operations on polynomials.
 
 Operations actually supported:
 
 - sum between polynomials
 - multiplication between polynomials
-- multiplication of a polynomial by a factor
+- multiplication of a polynomial by a factor (numeric or fraction)
 - evaluation of a polynomial and its derivative in one point
 
 ### `genpo.roots`
@@ -39,10 +39,10 @@ Utilities functions to work with roots and multiplicities.
 
 ### `genpo.representation`
 
-String representations of polynomials. Code thought to be printed in the terminal
+String representations of polynomials. The functions provided here were all thought to print their output in the terminal
 
 ## Random generators (`genpo.random`)
-All modules under `genpo.random` have the scope of generating random roots and polynomials. All values generated are roots simple to find and values easy to calculate for a person that is resolving a polynomial by hand.
+All modules under `genpo.random` have the scope of generating random roots and polynomials. All values generated are roots  and values simple to find and to calculate for a person that is resolving a polynomial by hand.
 
 ### `values`
 
