@@ -1,8 +1,8 @@
 # Genpo
 
-A python library and a simple CLI program to generate and manipulate polynomials with roots simple to find by hand. The degree of the polynomial, the number of roots and the multiplicities of these roots, are all tweakable to generate polynomials with different grades of difficulty.
+A python library and a simple CLI program to generate and manipulate polynomials, with roots simple to find by hand. The degree of the polynomial, the number of roots and the multiplicities of these roots, are all tweakable to generate polynomials with different grades of difficulty.
 
-I started this library while studying for a math exam where it was required to quickly find the roots of a polynomial of degree 3 or 4. It helped me pass it.
+I started this library while studying for a math exam where it was required to be able quickly find the roots of a polynomial of degree 3 or 4. It helped me pass it.
 
 # Python library
 
@@ -20,7 +20,7 @@ These modules provide functions to manipulate polynomials: creation, arithmetic 
 
 ### `genpo.polynomials`
 
-Pure functions for creating polynomials from parameters, parabolas for example.
+Pure functions for creating polynomials from parameters. For example, parabolas.
 
 ### `genpo.operations`
 
@@ -42,6 +42,7 @@ Utilities functions to work with roots and multiplicities.
 String representations of polynomials. The functions provided here were all thought to print their output in the terminal
 
 ## Random generators (`genpo.random`)
+
 All modules under `genpo.random` have the scope of generating random roots and polynomials. All values generated are roots  and values simple to find and to calculate for a person that is resolving a polynomial by hand.
 
 ### `values`
@@ -50,18 +51,20 @@ Generators for intervals of values, simple fractions or expanding randomly a lis
 
 ### `roots`
 
-Generators for random polynomials roots and multiplicities. All generated roots are integers numbers not too big. They are simple to find.
+Generators for random polynomials roots and multiplicities. All generated roots are integers numbers not too big, simple to find by hand.
 
 ### `polynomials`
 
-Generators for polynomials, with or without roots. This is the core of the genpo library, where many parts of the library are used. The functions in this file are divided in two categories: generators for polynomials in which the sum of multiplicities of their zeroes equals its degree, and generators for polynomials with an arbitrary sum of zeroes' multiplicity.
+Generators for polynomials, with or without roots. This is the core of the genpo library, where many parts of the library are used. The functions in this file are divided in two categories, based on the generated polynomials: 
 
-#### `fz` generators
+- generators for polynomials in which the sum of multiplicities of their zeroes equals its degree;
+
+- generators for polynomials with an arbitrary sum of zeroes' multiplicity.
+
+#### `fz` "full zeroes" generators
 
 Functions in the `genpo.random.polynomials` with `fz` in the name, are functions that returns polynomials that I defined *full zeroes*, polynomials in which the sum of multiplicities of their zeroes equals its degree.
-
 
 # Genpo cli
 
 Coming soon. Stay tuned ;)
-
